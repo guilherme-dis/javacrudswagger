@@ -2,6 +2,8 @@ package com.ufu.javacrudswagger.controller;
 
 import com.ufu.javacrudswagger.entities.Address;
 import com.ufu.javacrudswagger.repositories.AddressRepository;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +14,6 @@ import java.util.List;
 public class AddressController {
     @Autowired
     private AddressRepository addressRepository;
-
 
     @GetMapping
     public List<Address> findAll() {

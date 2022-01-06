@@ -14,12 +14,17 @@ public class EmployeeController {
     private EmployeeRepository employeeRepository;
 
     @GetMapping
-    public List<Employee> findAll(){
+    public List<Employee> findAll() {
         return employeeRepository.findAll();
     }
+
     @PostMapping
-    public Employee insert(@RequestBody Employee employee){
-        return employeeRepository.save(employee);
+    public Employee insert(@RequestBody Employee employee) {return employeeRepository.save(employee);}
+
+    @GetMapping("/{id}")
+    public Employee findById(@PathVariable Long id) {
+        return employeeRepository.findById(id).get();
     }
+
 
 }
