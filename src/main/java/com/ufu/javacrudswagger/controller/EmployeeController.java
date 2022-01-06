@@ -38,16 +38,19 @@ public class EmployeeController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> Delete(@PathVariable long id)
+    public ResponseEntity<Object> Delete(@PathVariable Long id)
     {
-        Optional<Employee> employee = employeeRepository.findById(id);
-
-        if(employee.isPresent()){
-            employeeRepository.delete(employee.get());
+        try {
+            employeeRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            Optional<Employee> employee=employeeRepository.findById(id);
+            if (employee.isPresent()){
+                return new ResponseEntity<>(HttpStatus.valueOf(420));
+            }else{
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         }
-        else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 }

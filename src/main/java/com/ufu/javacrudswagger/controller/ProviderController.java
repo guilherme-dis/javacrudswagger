@@ -1,5 +1,6 @@
 package com.ufu.javacrudswagger.controller;
 
+import com.ufu.javacrudswagger.entities.Address;
 import com.ufu.javacrudswagger.entities.Product;
 import com.ufu.javacrudswagger.entities.Provider;
 import com.ufu.javacrudswagger.repositories.ProductRepository;
@@ -42,14 +43,17 @@ public class ProviderController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> Delete(@PathVariable Long id)
     {
-        Optional<Provider> provider = providerRepository.findById(id);
-
-        if(provider.isPresent()){
-            providerRepository.delete(provider.get());
+        try {
+            providerRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            Optional<Provider> provider=providerRepository.findById(id);
+            if (provider.isPresent()){
+                return new ResponseEntity<>(HttpStatus.valueOf(420));
+            }else{
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         }
-        else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 }

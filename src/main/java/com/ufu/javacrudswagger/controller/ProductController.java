@@ -40,13 +40,16 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> Delete(@PathVariable Long id)
     {
-        Optional<Product> product = productRepository.findById(id);
-
-        if(product.isPresent()){
-            productRepository.delete(product.get());
+        try {
+            productRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            Optional<Product> product=productRepository.findById(id);
+            if (product.isPresent()){
+                return new ResponseEntity<>(HttpStatus.valueOf(420));
+            }else{
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         }
-        else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

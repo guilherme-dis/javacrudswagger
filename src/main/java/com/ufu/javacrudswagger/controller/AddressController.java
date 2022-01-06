@@ -3,7 +3,6 @@ package com.ufu.javacrudswagger.controller;
 import com.ufu.javacrudswagger.entities.Address;
 import com.ufu.javacrudswagger.repositories.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -42,21 +41,18 @@ public class AddressController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> Delete(@PathVariable(value = "id") long id)
+    public ResponseEntity<Object> Delete(@PathVariable Long id)
     {
-        Optional<Address> address = addressRepository.findById(id);
-
-        if(address.isPresent()){
-            try {
-                addressRepository.delete(address.get());
-            }catch (EmptyResultDataAccessException e){
+        try {
+            addressRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            Optional<Address> address=addressRepository.findById(id);
+            if (address.isPresent()){
+                return new ResponseEntity<>(HttpStatus.valueOf(420));
+            }else{
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
-
-            return new ResponseEntity<>(HttpStatus.OK);
         }
-        else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
 }
