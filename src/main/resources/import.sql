@@ -1,6 +1,7 @@
 INSERT INTO tb_address(country,city,state,streat,number,complement,cep) VALUES ('Brasil','Brodowski','SP','Antonio Francisco','750','casa','14340000');
 INSERT INTO tb_address(country,city,state,streat,number,complement,cep) VALUES ('Brasil','Uberlândia','MG','Avenida Platina','250','apto','38414042');
 
+
 INSERT INTO tb_provider(name,address_id) VALUES ('Nestle',1);
 INSERT INTO tb_provider(name,address_id) VALUES ('Cacau show',2);
 

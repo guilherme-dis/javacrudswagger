@@ -14,11 +14,9 @@ import javax.persistence.*;
 public class Provider {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
     @Column(length = 50)
     private String name;
-
 
     @ManyToOne
     @JoinColumn(name = "address_id")
