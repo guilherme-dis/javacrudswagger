@@ -3,6 +3,7 @@ package com.ufu.javacrudswagger.controller;
 import com.ufu.javacrudswagger.entities.Address;
 import com.ufu.javacrudswagger.repositories.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -46,21 +47,16 @@ public class AddressController {
         Optional<Address> address = addressRepository.findById(id);
 
         if(address.isPresent()){
-            addressRepository.delete(address.get());
+            try {
+                addressRepository.delete(address.get());
+            }catch (EmptyResultDataAccessException e){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
             return new ResponseEntity<>(HttpStatus.OK);
         }
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-
-
-
-
-
-//todo estudar esse responseentity
-//    public ResponseEntity<Page<Address>> findAll(Pageable pageable){
-//        Page<Address>result= addressRepository.findAll(pageable);
-//        return ResponseEntity.ok(result);
-//    }
 }
