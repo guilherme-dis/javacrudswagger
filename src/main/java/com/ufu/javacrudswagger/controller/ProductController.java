@@ -1,8 +1,6 @@
 package com.ufu.javacrudswagger.controller;
 
-import com.ufu.javacrudswagger.entities.Address;
 import com.ufu.javacrudswagger.entities.Product;
-import com.ufu.javacrudswagger.repositories.AddressRepository;
 import com.ufu.javacrudswagger.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

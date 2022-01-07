@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -18,9 +19,12 @@ public class AddressController {
     private AddressRepository addressRepository;
 
     @PostMapping
-    public Address insert(@RequestBody Address address) {
+    public Address insert(@RequestBody @Valid Address address) {
         return addressRepository.save(address);
     }
+    //verificar os dados, se não vai dar erro no banco
+
+
     @GetMapping
     public ResponseEntity<Page<Address>> findAll(Pageable pageable){
         Page<Address>result= addressRepository.findAll(pageable);
@@ -38,7 +42,6 @@ public class AddressController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
          */
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> Delete(@PathVariable Long id)

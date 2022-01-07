@@ -1,6 +1,5 @@
 package com.ufu.javacrudswagger.controller;
 
-import com.ufu.javacrudswagger.entities.Address;
 import com.ufu.javacrudswagger.entities.Employee;
 import com.ufu.javacrudswagger.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
