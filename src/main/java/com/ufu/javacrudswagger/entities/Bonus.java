@@ -3,6 +3,8 @@ package com.ufu.javacrudswagger.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -17,8 +19,12 @@ public class Bonus {
     @Column(name = "id", nullable = false)
     private Long id;
     @Column(length = 8)
+    @NotEmpty(message = "The CPF cannot be empty")
+    @Size(min = 8, max = 8, message = "CPF must be between 8 characters")
     private String cpf;
+    @NotEmpty(message = "The score cannot be empty")
     private Double score;
+    @NotEmpty(message = "The cash_back cannot be empty")
     private Double cash_back;
 
 }
