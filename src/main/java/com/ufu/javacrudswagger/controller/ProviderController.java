@@ -1,7 +1,10 @@
 package com.ufu.javacrudswagger.controller;
 
+import com.ufu.javacrudswagger.entities.Address;
 import com.ufu.javacrudswagger.entities.Provider;
 import com.ufu.javacrudswagger.repositories.ProviderRepository;
+import com.ufu.javacrudswagger.services.AddressService;
+import com.ufu.javacrudswagger.services.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -16,41 +20,28 @@ import java.util.Optional;
 public class ProviderController {
 
     @Autowired
-    private ProviderRepository providerRepository;
+    private ProviderService providerService;
 
     @PostMapping
-    public Provider insert(@RequestBody Provider provider){
-        return providerRepository.save(provider);
+    public Provider insert(@RequestBody @Valid Provider provider) {
+        return providerService.save(provider);
     }
-
 
     @GetMapping
     public ResponseEntity<Page<Provider>> findAll(Pageable pageable){
-        Page<Provider>result= providerRepository.findAll(pageable);
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(providerService.findAll(pageable));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Provider> getById(@PathVariable Long id){
-        Optional<Provider> providerOptional = providerRepository.findById(id);
-        return providerOptional.map(provider -> new ResponseEntity<>(provider, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public ResponseEntity<Provider> getById(@PathVariable Long id) {
+        return providerService.findById(id);
     }
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> Delete(@PathVariable Long id)
-    {
-        try {
-            providerRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }catch (Exception e){
-            Optional<Provider> provider=providerRepository.findById(id);
-            if (provider.isPresent()){
-                return new ResponseEntity<>(HttpStatus.valueOf(420));
-            }else{
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        }
+    public ResponseEntity<Provider> Delete(@PathVariable Long id) {
+        return providerService.deleteById(id);
     }
+
 
 }
