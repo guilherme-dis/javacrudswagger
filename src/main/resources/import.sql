@@ -11,6 +11,10 @@ INSERT INTO tb_product(name,price,qtd_store,provider_id) VALUES ('Nescal',12.50,
 INSERT INTO tb_employee(name,occupation,username,password,address_id) VALUES ('Carlos Pereira','Caixa','carlos123','carlos123',1);
 INSERT INTO tb_employee(name,occupation,username,password,address_id) VALUES ('Sofia Dias','Gerente','sofia123','sofia123',2);
 
+INSERT INTO tb_bonus(cpf,score,cash_back)VALUES('70122924665',50.0,1.0);
+INSERT INTO tb_bonus(cpf,score,cash_back)VALUES('12345678910',50.0,1.0);
+-- INSERT INTO tb_bonus(cpf,score,cash_back)VALUES('70122924665',50.0,1.0);
+
 -- TODO falta os cadastros do bonus
 
 
