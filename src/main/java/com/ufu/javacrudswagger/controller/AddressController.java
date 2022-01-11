@@ -22,7 +22,7 @@ public class AddressController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Address>> findAll(Pageable pageable){
+    public ResponseEntity<Page<Address>> findAll(Pageable pageable) {
         return ResponseEntity.ok(addressService.findAll(pageable));
     }
 

@@ -23,7 +23,7 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Product>> findAll(Pageable pageable){
+    public ResponseEntity<Page<Product>> findAll(Pageable pageable) {
         return ResponseEntity.ok(productService.findAll(pageable));
     }
 
