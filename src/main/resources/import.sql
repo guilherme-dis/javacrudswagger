@@ -13,6 +13,7 @@ INSERT INTO tb_employee(name,occupation,username,password,address_id) VALUES ('S
 
 INSERT INTO tb_bonus(cpf,score,cash_back)VALUES('70122924665',50.0,1.0);
 INSERT INTO tb_bonus(cpf,score,cash_back)VALUES('12345678910',50.0,1.0);
+
 -- INSERT INTO tb_bonus(cpf,score,cash_back)VALUES('70122924665',50.0,1.0);
 
 -- TODO falta os cadastros do bonus
