@@ -1,5 +1,6 @@
 package com.ufu.javacrudswagger.entities;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import javax.persistence.*;
@@ -36,7 +37,6 @@ public class Employee {
     @NotEmpty(message = "The Employee password cannot be empty")
     @Size(min = 3, max = 50, message = "Password must be between 3 and 50 characters")
     private String password;
-
     @ManyToOne
     @JoinColumn(name = "address_id")
     private Address address;
