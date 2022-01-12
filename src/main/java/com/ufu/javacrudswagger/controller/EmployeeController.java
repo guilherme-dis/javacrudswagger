@@ -11,13 +11,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-
 @RestController
 @RequestMapping(value = "/employee")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
+
 
     @PostMapping
     @ApiOperation(value = "saving a employee")
@@ -26,7 +25,7 @@ public class EmployeeController {
             @ApiResponse(code = 401, message = "You are not authorized to save this"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
-    public Employee insert(@RequestBody @Valid Employee employee) {
+    public ResponseEntity<Employee> insert(@RequestBody Employee employee){
         return employeeService.save(employee);
     }
 
@@ -38,7 +37,7 @@ public class EmployeeController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
     public ResponseEntity<Page<Employee>> findAll(Pageable pageable) {
-        return ResponseEntity.ok(employeeService.findAll(pageable));
+        return employeeService.findAll(pageable);
     }
 
     @GetMapping("/{id}")
@@ -65,5 +64,9 @@ public class EmployeeController {
         return employeeService.deleteById(id);
     }
 
-
+    @GetMapping("/validarsenha")
+    @ApiOperation(value = "password validating")
+    public ResponseEntity<Boolean> validarSenha(@RequestParam String username,@RequestParam String password) {
+        return employeeService.validarSenha(username, password);
+    }
 }

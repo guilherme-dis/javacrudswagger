@@ -1,6 +1,5 @@
 package com.ufu.javacrudswagger.services;
 
-import com.ufu.javacrudswagger.entities.Address;
 import com.ufu.javacrudswagger.entities.Bonus;
 import com.ufu.javacrudswagger.repositories.BonusRepotitory;
 import org.springframework.beans.factory.annotation.Autowired;

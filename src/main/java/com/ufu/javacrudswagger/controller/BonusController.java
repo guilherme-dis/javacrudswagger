@@ -1,7 +1,6 @@
 package com.ufu.javacrudswagger.controller;
 
 import com.ufu.javacrudswagger.entities.Bonus;
-import com.ufu.javacrudswagger.entities.Provider;
 import com.ufu.javacrudswagger.services.BonusService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

@@ -2,25 +2,32 @@ package com.ufu.javacrudswagger.services;
 
 import com.ufu.javacrudswagger.entities.Employee;
 import com.ufu.javacrudswagger.repositories.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 @Service
 public class EmployeeService {
-    @Autowired
-    private EmployeeRepository employeeRepository;
 
-    public Page<Employee> findAll(Pageable pageable){
-        return employeeRepository.findAll(pageable);
+    private final EmployeeRepository employeeRepository;
+    private final PasswordEncoder encoder;
+
+    public EmployeeService(EmployeeRepository employeeRepository, PasswordEncoder encoder) {
+        this.employeeRepository = employeeRepository;
+        this.encoder = encoder;
     }
 
-    public Employee save(Employee employee){
-        return employeeRepository.save(employee);
+    public ResponseEntity<Page<Employee>> findAll(Pageable pageable){
+        return ResponseEntity.ok(employeeRepository.findAll(pageable));
+    }
+
+    public ResponseEntity<Employee> save(Employee employee){
+        employee.setPassword(encoder.encode(employee.getPassword()));//encripting
+        return ResponseEntity.ok(employeeRepository.save(employee));
     }
 
     public ResponseEntity<Employee> findById(Long id){
@@ -41,5 +48,14 @@ public class EmployeeService {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         }
+    }
+    public ResponseEntity<Boolean> validarSenha(String username, String password){
+        Optional<Employee> optionalEmployee=employeeRepository.findByUsername(username);
+        if(optionalEmployee.isEmpty()){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
+        }
+        boolean valid = encoder.matches(password,optionalEmployee.get().getPassword());
+        HttpStatus status = (valid) ? HttpStatus.OK : HttpStatus.UNAUTHORIZED;
+        return ResponseEntity.status(status).body(valid);
     }
 }
