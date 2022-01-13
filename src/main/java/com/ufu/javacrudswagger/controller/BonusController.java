@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/bonus")
+@RequestMapping("/api/bonus")
 public class BonusController {
     @Autowired
     private BonusService bonusService;

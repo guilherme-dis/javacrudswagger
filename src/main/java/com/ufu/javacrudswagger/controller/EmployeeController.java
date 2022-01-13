@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/employee")
+@RequestMapping(value = "/api/employee")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
@@ -64,9 +64,5 @@ public class EmployeeController {
         return employeeService.deleteById(id);
     }
 
-    @GetMapping("/validarsenha")
-    @ApiOperation(value = "password validating")
-    public ResponseEntity<Boolean> validarSenha(@RequestParam String username,@RequestParam String password) {
-        return employeeService.validarSenha(username, password);
-    }
+
 }

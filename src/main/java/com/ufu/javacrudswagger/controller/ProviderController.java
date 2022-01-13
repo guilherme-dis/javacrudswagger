@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(value = "/provider")
+@RequestMapping(value = "/api/provider")
 public class ProviderController {
 
     @Autowired

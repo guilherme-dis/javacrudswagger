@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/address")
+@RequestMapping("/api/address")
 @Api(value = "API REST Address")
 @CrossOrigin(origins = "*")
 public class AddressController {
