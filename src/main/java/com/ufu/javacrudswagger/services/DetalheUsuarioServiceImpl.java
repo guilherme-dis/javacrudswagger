@@ -1,6 +1,6 @@
 package com.ufu.javacrudswagger.services;
 
-import com.ufu.javacrudswagger.data.DetalheUsuarioData;
+import com.ufu.javacrudswagger.data.UserDetailsData;
 import com.ufu.javacrudswagger.entities.Employee;
 import com.ufu.javacrudswagger.repositories.EmployeeRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,10 +23,10 @@ public class DetalheUsuarioServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Employee> employee = employeeRepository.findByUsername(username);
         if (employee.isEmpty()) {
-            throw new UsernameNotFoundException("Usuário [" + username + "] não encontrado");
+            throw new UsernameNotFoundException("User [" + username + "] don't found");
         }
 
-        return new DetalheUsuarioData(employee);
+        return new UserDetailsData(employee);
     }
 
 }

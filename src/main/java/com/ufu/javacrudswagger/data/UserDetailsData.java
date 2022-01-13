@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
-public class DetalheUsuarioData implements UserDetails {
+public class UserDetailsData implements UserDetails {
 
 
     private final Optional<Employee> employeeOptional;
 
-    public DetalheUsuarioData(Optional<Employee> employeeOptional) {
+    public UserDetailsData(Optional<Employee> employeeOptional) {
         this.employeeOptional = employeeOptional;
     }
 

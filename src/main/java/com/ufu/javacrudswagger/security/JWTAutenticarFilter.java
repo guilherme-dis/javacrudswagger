@@ -3,7 +3,7 @@ package com.ufu.javacrudswagger.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ufu.javacrudswagger.data.DetalheUsuarioData;
+import com.ufu.javacrudswagger.data.UserDetailsData;
 import com.ufu.javacrudswagger.entities.Employee;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -47,7 +47,7 @@ public class JWTAutenticarFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        DetalheUsuarioData usuarioData = (DetalheUsuarioData) authResult.getPrincipal();
+        UserDetailsData usuarioData = (UserDetailsData) authResult.getPrincipal();
         String token = JWT.create()
                 .withSubject(usuarioData.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRACAO))
