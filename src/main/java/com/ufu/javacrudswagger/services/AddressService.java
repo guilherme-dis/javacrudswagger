@@ -2,6 +2,7 @@ package com.ufu.javacrudswagger.services;
 
 import com.ufu.javacrudswagger.entities.Address;
 import com.ufu.javacrudswagger.repositories.AddressRepository;
+import io.swagger.models.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,8 +21,8 @@ public class AddressService {
         return addressRepository.findAll(pageable);
     }
 
-    public Address save(Address address){
-        return addressRepository.save(address);
+    public ResponseEntity<Address> save(Address address){
+        return ResponseEntity.ok(addressRepository.save(address));
     }
 
     public ResponseEntity<Address> findById(Long id){

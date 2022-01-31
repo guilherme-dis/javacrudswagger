@@ -16,7 +16,7 @@ public class ValidatingPasswordController {
     private EmployeeService employeeService;
 
     @GetMapping
-    @ApiOperation(value = "password validatingg")
+    @ApiOperation(value = "password validating")
     public ResponseEntity<Boolean> validarSenha(@RequestParam String username, @RequestParam String password) {
         return employeeService.validarSenha(username, password);
     }

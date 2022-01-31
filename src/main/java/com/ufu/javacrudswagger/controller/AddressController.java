@@ -1,5 +1,6 @@
 package com.ufu.javacrudswagger.controller;
 
+import com.ufu.javacrudswagger.dto.AddressDTO;
 import com.ufu.javacrudswagger.entities.Address;
 import com.ufu.javacrudswagger.services.AddressService;
 import io.swagger.annotations.Api;
@@ -9,6 +10,7 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,8 +31,8 @@ public class AddressController {
             @ApiResponse(code = 401, message = "You are not authorized to save this address"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
-    public Address insert(@RequestBody @Valid Address address) {
-        return addressService.save(address);
+    public ResponseEntity<Address> insert(@RequestBody @Valid AddressDTO address) {
+        return addressService.save(address.transformaParaObjeto());
     }
 
     @GetMapping
